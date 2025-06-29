@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Product List{% endblock %}
+
+{% block content %}
+    <div class="col-12">
+        {% if request.user.is_superuser %}
+            <div class="row">
+                <div class="col-xl-2 col-md-4 col-6 ">
+                    <a class="btn btn-success col-12 mx-2" href="{% url 'product-add' %}" title="Create product">Create Product</a>
+                </div>
+            </div>
+        {% endif %}
+
+
+        {% include 'partials/name_and_product_block.html' with title='All Products' empty_text='There are no products here yet.' %}
+    </div>
+{% endblock %}

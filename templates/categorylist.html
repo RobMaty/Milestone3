@@ -1,0 +1,16 @@
+{% block title %}Category List{% endblock %}
+
+{% block content %}
+    <div class="col-12">
+        {% if request.user.is_superuser %}
+            <div class="row">
+                <div class="col-xl-2 col-md-4 col-6 ">
+{#                    <a class="btn btn-success col-12 mx-2" href="{% url 'category-add' %}" title="Create category">Create Category</a>#}
+                </div>
+            </div>
+        {% endif %}
+
+
+        {% include 'partials/name_and_category_block.html' with title='All Categories' empty_text='There are no categories here yet.' %}
+    </div>
+{% endblock %}

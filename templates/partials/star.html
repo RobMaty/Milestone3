@@ -1,0 +1,6 @@
+{% load static %}
+{% if grade > current_grade %}
+    <img src="{% static 'icons/start_full.png' %}" alt="" height="24" width="24">
+{% else %}
+    <img src="{% static 'icons/start_empty.png' %}" alt="" height="24" width="24">
+{% endif %}

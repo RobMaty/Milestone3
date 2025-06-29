@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block content %}
+    {% url 'brand-update' category.id as update_url %}
+    {% include 'partials/name_and_product_block.html' with title=category.name products=category.product_set.all %}
+{% endblock %}

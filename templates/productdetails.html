@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block name %}Product detail {{ product.name }}{% endblock %}
+
+{% block content %}
+    <div class="col-xl-6 col-lg-9 col-12">
+        <div class="col-12 row">
+            <div class="col-lg-6 col-12">
+                <img src="{{ product.image.url }}" alt="product image" class="col-12">
+            </div>
+            <div class="col-lg-6 col-12">
+                <h1>
+                    <p>{{ product.name }}</p>
+                </h1>
+                <p><a href="{% url 'category_details' product.category.pk %}"> {{ product.category }} </a></p>
+                By<p><a href="{% url 'brand_details' product.brand.pk %}">{{ product.brand }}</a></p>
+{#                Main review#}
+        </div>
+        <div class="col-12">
+            <form action="{% url 'review_create' %}?product={{ product.id }}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="product" value="{{ product.id }}">
+                {{ review_form.as_p }}
+                <button type="submit" class="btn btn-success">Create review</button>
+            </form>
+        </div>
+
+        <div class="col-12">
+            {% for review in product.review_set.all %}
+                <div>
+                    <img src="{% static 'icons/user.png' %}" alt="user" height="24" width="24">
+                    {{ review.user.get_full_name }}
+                    {% include 'partials/stars.html' with grade=review.grade %}
+                </div>
+                <div>
+                    <p>
+                         {{ review.text }}
+                    </p>
+                    <p>
+                        {{ review.date }}
+                    </p>
+                </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+{% endblock %}
